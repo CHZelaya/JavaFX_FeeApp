@@ -1,3 +1,11 @@
+/**
+ * Winter 2025 Java Programming for OOSD
+ * CMPP 264 Assignment 2
+ * Carlos Hernandez-Zelaya
+ * Feb 2025
+ */
+
+
 package org.example.javafx_fees;
 
 import java.io.IOException;
@@ -140,7 +148,7 @@ public class FeesController {
             data = FeeDb.getFees();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Couldnt Load the Fee List", e);
+            throw new RuntimeException("REBUTTAL AGENCY: Couldn't Load the Fee's display", e);
         }
         tvFeeList.setItems(data);
     }

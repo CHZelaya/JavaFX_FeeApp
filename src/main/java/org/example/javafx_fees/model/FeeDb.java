@@ -1,3 +1,11 @@
+/**
+ * Winter 2025 Java Programming for OOSD
+ * CMPP 264 Assignment 2
+ * Carlos Hernandez-Zelaya
+ * Feb 2025
+ */
+
+
 package org.example.javafx_fees.model;
 
 import javafx.collections.FXCollections;
@@ -67,13 +75,31 @@ public class FeeDb {
         return affectedRows;
     }
 
-    public static int updateFee(Fee fee) {
+    public static int updateFee(Fee fee) throws SQLException {
+        Connection conn = getConnection();
         int affectedRows = 0;
+        String sql = "update fees Set feeid = ? , feename = ? , feeamt = ? , feedesc = ? where feeid = ?" ;
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, fee.getFeeId());
+        stmt.setString(2, fee.getFeeName());
+        stmt.setDouble(3, fee.getFeeAmt());
+        stmt.setString(4, fee.getFeeDesc());
+        stmt.setString(5, fee.getFeeId());
+        affectedRows = stmt.executeUpdate();
+        stmt.close();
         return affectedRows;
     }
 
-    public static int deleteFee(String id) {
-        return 0;
+    public static int deleteFees(String fees) throws SQLException {
+        Connection conn = getConnection();
+        int affectedRows = 0;
+        String sql = "delete from fees where feeid = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, fees);
+        affectedRows = stmt.executeUpdate();
+        stmt.close();
+        return affectedRows;
+
     }
 
 

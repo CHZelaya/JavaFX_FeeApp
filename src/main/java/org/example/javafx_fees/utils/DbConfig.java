@@ -1,3 +1,10 @@
+/**
+ * Winter 2025 Java Programming for OOSD
+ * CMPP 264 Assignment 2
+ * Carlos Hernandez-Zelaya
+ * Feb 2025
+ */
+
 package org.example.javafx_fees.utils;
 
 import java.io.InputStream;

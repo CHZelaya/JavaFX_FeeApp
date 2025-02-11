@@ -1,5 +1,11 @@
-package org.example.javafx_fees.model;
+/**
+ * Winter 2025 Java Programming for OOSD
+ * CMPP 264 Assignment 2
+ * Carlos Hernandez-Zelaya
+ * Feb 2025
+ */
 
+package org.example.javafx_fees.model;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 

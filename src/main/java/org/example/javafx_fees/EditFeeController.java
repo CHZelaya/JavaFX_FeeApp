@@ -1,7 +1,12 @@
-package org.example.javafx_fees; /**
- * Sample Skeleton for 'fee-modification.fxml' Controller Class
+/**
+ * Winter 2025 Java Programming for OOSD
+ * CMPP 264 Assignment 2
+ * Carlos Hernandez-Zelaya
+ * Feb 2025
  */
 
+
+package org.example.javafx_fees;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,7 +22,7 @@ import org.example.javafx_fees.utils.Validator;
 
 public class EditFeeController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -71,9 +76,8 @@ public class EditFeeController {
         btnCancel.setOnMouseClicked(event -> {
             closeWindow(event);
         });
-
-
     }
+
 
     private void saveFee() {
         int numRows = 0;
@@ -89,7 +93,11 @@ public class EditFeeController {
                 alertUser(Alert.AlertType.CONFIRMATION, "REBUTTAL AGENCY: Fee Added Successfully");
 
             }else if(actionFlag.equalsIgnoreCase("edit")) {
-                numRows = FeeDb.updateFee(fee);
+                try {
+                    numRows = FeeDb.updateFee(fee);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }else{
                 alertUser(Alert.AlertType.ERROR, "REBUTTAL AGENCY: An unexpected error occurred, please try again.");
             }
@@ -104,7 +112,7 @@ public class EditFeeController {
         String id = tfID.getText();
 
         try{
-            price =Double.parseDouble(tfPrice.getText());
+            price = Double.parseDouble(tfPrice.getText());
         }catch(NumberFormatException e) {
             alertUser(Alert.AlertType.ERROR, "REBUTTAL AGENCY: Price must be an MUST be a numeric value (0-9)");
         }
@@ -121,13 +129,19 @@ public class EditFeeController {
     private void deleteFee() {
         int affectedRows = 0;
         String id = tfID.getText();
-        affectedRows = FeeDb.deleteFee(id);
+        try {
+            affectedRows = FeeDb.deleteFees(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         if (affectedRows == 1) {
             alertUser(Alert.AlertType.CONFIRMATION, "REBUTTAL AGENCY: You have successfully deleted your fee");
         }else{
             alertUser(Alert.AlertType.ERROR, "REBUTTAL AGENCY: There was an error with deletion.");
         }
     }
+
+
 
     private void closeWindow(MouseEvent event) {
         Node node = (Node) event.getSource();
@@ -141,6 +155,8 @@ public class EditFeeController {
         tfID.setDisable(actionFlag.equalsIgnoreCase("edit"));
         txtTitle.setText("TE: Fees - " + capitalizeFirstLetter(actionFlag) + " mode" );
     }
+
+
     private void alertUser(Alert.AlertType type,  String message) {
         Alert alert = new Alert(type);
         alert.setTitle(type.toString());
@@ -148,6 +164,8 @@ public class EditFeeController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
     public void setFeeForm(Fee fee){
         tfID.setText(String.valueOf(fee.getFeeId()));
         tfName.setText(fee.getFeeName());

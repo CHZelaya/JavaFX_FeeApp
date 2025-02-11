@@ -1,3 +1,10 @@
+/**
+ * Winter 2025 Java Programming for OOSD
+ * CMPP 264 Assignment 2
+ * Carlos Hernandez-Zelaya
+ * Feb 2025
+ */
+
 package org.example.javafx_fees.utils;
 
 import org.example.javafx_fees.model.Fee;
@@ -7,7 +14,7 @@ public class Validator {
     public static String validateFee(Fee fee) {
         String errorMessage = "";
         if (!fee.getFeeId().matches("^[a-zA-Z0-9 ]{1,10}$")) {
-            errorMessage += " Fee ID must contain a maximum 10 digits. No Special Characters please\n";
+            errorMessage += " Fee ID must contain a maximum of 10 Characters. No Special Characters please\n";
         }
 
         if (!fee.getFeeName().matches("^[a-zA-Z0-9 ]{1,50}$")) {
